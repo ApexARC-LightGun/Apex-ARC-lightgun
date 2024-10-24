@@ -1,3 +1,11 @@
+/*
+ * This code is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+ * You may not use this file except in compliance with the License.
+ *
+ * You may obtain a copy of the License at https://creativecommons.org/licenses/by-nc-sa/4.0/
+ *
+ * Attribution should be given to: Apex ARC © 2024 by Mardy Nagle
+ */
 /*******************************************************************************
  * ApexArc Controller - Main Controller Code
  * 
