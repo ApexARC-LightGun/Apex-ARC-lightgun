@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Arc Lightgun User Manual</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #121212;
+            color: #00ff99;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: 121212;
+            color: #00ff99;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background: #121212;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h2 {
+            color: #fbff29;
+        }
+
+        h3 {
+            color: #e8e8e8;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            margin: 5px 0;
+        }
+
+        a {
+            color: #00af03;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #121212;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            font-size: 0.9em;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Apex Arc Lightgun User Manual</h1>
+    </header>
+
+    <div class="container">
+        <h2>Table of Contents</h2>
+        <ul>
+            <li><a href="#introduction">1. Introduction</a></li>
+            <li><a href="#getting-started">2. Getting Started</a>
+                <ul>
+                    <li><a href="#setting-up-your-apex-arc-lightgun">Setting Up Your Apex Arc Lightgun</a></li>
+                    <li><a href="#connecting-to-the-configuration-interface">Connecting to the Configuration Interface</a></li>
+                </ul>
+            </li>
+            <li><a href="#configuration">3. Configuration</a>
+                <ul>
+                    <li><a href="#ble-device-name">BLE Device Name</a></li>
+                    <li><a href="#wifi-settings">Wi-Fi Settings</a></li>
+                    <li><a href="#trigger-modes">Trigger Modes</a></li>
+                    <li><a href="#feedback-settings">Feedback Settings</a></li>
+                </ul>
+            </li>
+            <li><a href="#calibration">4. Calibration</a></li>
+            <li><a href="#troubleshooting">5. Troubleshooting</a></li>
+            <li><a href="#maintenance-and-care">6. Maintenance and Care</a></li>
+            <li><a href="#technical-specifications">7. Technical Specifications</a></li>
+            <li><a href="#safety-information">8. Safety Information</a></li>
+            <li><a href="#warranty-and-support">9. Warranty and Support</a></li>
+        </ul>
+
+        <h2 id="introduction">Introduction</h2>
+        <p>Welcome to the Apex Arc Lightgun user manual. This guide will help you set up, configure, and use your Apex Arc Lightgun for the best gaming experience.</p>
+
+        <h2 id="getting-started">Getting Started</h2>
+
+        <h3 id="setting-up-your-apex-arc-lightgun">Setting Up Your Apex Arc Lightgun</h3>
+        <ol>
+            <li>Unbox your Apex Arc Lightgun.</li>
+            <li>Insert batteries or connect the power cable (depending on your model).</li>
+            <li>Ensure your gaming setup includes a compatible IR bar or sensor.</li>
+        </ol>
+
+        <h3 id="connecting-to-the-configuration-interface">Connecting to the Configuration Interface</h3>
+        <ol>
+            <li>Power on your Apex Arc Lightgun.</li>
+            <li>On your computer or mobile device, connect to the Wi-Fi network broadcast by the lightgun (default SSID: "ApexArc").</li>
+            <li>Open a web browser and navigate to the configuration interface (typically at <a href="http://192.168.4.1" target="_blank">http://192.168.4.1</a>).</li>
+        </ol>
+
+        <h2 id="configuration">Configuration</h2>
+
+        <h3 id="ble-device-name">BLE Device Name</h3>
+        <p>Set a unique Bluetooth Low Energy (BLE) name for your lightgun to easily identify it when connecting to your gaming system.</p>
+
+        <h3 id="wifi-settings">Wi-Fi Settings</h3>
+        <p>Configure the SSID and password for the lightgun's Wi-Fi network. This allows you to connect to the configuration interface.</p>
+
+        <h3 id="trigger-modes">Trigger Modes</h3>
+        <p>Choose from three trigger modes:</p>
+        <ol>
+            <li><strong>Single Shot:</strong> One click per trigger pull.</li>
+            <li><strong>Burst Mode:</strong> Multiple clicks per trigger pull (configurable count and delay).</li>
+            <li><strong>Full Auto:</strong> Continuous clicking while the trigger is held (configurable clicks per second).</li>
+        </ol>
+
+        <h3 id="feedback-settings">Feedback Settings</h3>
+        <p>Adjust haptic feedback settings:</p>
+        <ul>
+            <li>Enable or disable feedback</li>
+            <li>Set feedback duration</li>
+            <li>Set feedback delay</li>
+        </ul>
+
+        <h2 id="calibration">Calibration</h2>
+        <p>Follow these steps to calibrate your Apex Arc Lightgun:</p>
+        <ol>
+            <li>Click the "Start Calibration" button on the configuration interface.</li>
+            <li>Point your lightgun at each corner of your screen as prompted.</li>
+            <li>Click the trigger when the lightgun is aimed at each calibration point.</li>
+            <li>After all points are calibrated, your lightgun will be optimized for your screen.</li>
+        </ol>
+
+        <h2 id="troubleshooting">Troubleshooting</h2>
+        <ul>
+            <li>If the lightgun isn't responding, check the battery level or power connection.</li>
+            <li>Ensure the IR bar or sensor is properly positioned and functioning.</li>
+            <li>If calibration issues persist, try resetting to default settings and recalibrating.</li>
+        </ul>
+
+        <h2 id="maintenance-and-care">Maintenance and Care</h2>
+        <ul>
+            <li>Clean the IR sensor on the lightgun regularly with a soft, dry cloth.</li>
+            <li>Store in a cool, dry place when not in use.</li>
+            <li>Remove batteries if storing for an extended period.</li>
+        </ul>
+
+        <h2 id="technical-specifications">Technical Specifications</h2>
+        <table>
+            <tr>
+                <th>Compatible with</th>
+                <td>[List of compatible systems]</td>
+            </tr>
+            <tr>
+                <th>Power</th>
+                <td>[Battery type or power requirements]</td>
+            </tr>
+            <tr>
+                <th>Wireless</th>
+                <td>Bluetooth Low Energy (BLE)</td>
+            </tr>
+            <tr>
+                <th>Sensor</th>
+                <td>High-precision IR camera</td>
+            </tr>
+        </table>
+
+        <h2 id="safety-information">Safety Information</h2>
+        <ul>
+            <li>Do not point the lightgun at eyes or face.</li>
+            <li>Keep away from water and extreme temperatures.</li>
+            <li>Do not disassemble the lightgun.</li>
+        </ul>
+
+        <h2 id="warranty-and-support">Warranty and Support</h2>
+        <p>For warranty information and technical support, please visit our website at [website URL] or contact our customer service team at [contact information].</p>
+    </div>
+
+    <footer>
+        &copy; 2024 Apex Arc. All rights reserved.
+    </footer>
+
+</body>
+</html>

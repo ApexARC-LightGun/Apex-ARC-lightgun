@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Arc Lightgun Settings</title>
+    <!-- Main stylesheet with cyberpunk theme -->
+    <style>
+        /* Base body styles with dark theme */
+        body {
+            background-color: #121212;
+            color: #00ff99;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* Main container styling */
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 255, 153, 0.2);
+        }
+
+        /* Logo container styling */
+        .logo-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo-container img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Heading styles */
+        h1, h2 {
+            color: #00ff99;
+            text-align: center;
+        }
+        
+        h3 {
+            color: #d5d5bb;
+            text-align: center;
+        }
+
+        /* Form styling */
+        form {
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        /* Form input styling */
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #00ff99;
+        }
+
+        input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            background-color: #333333;
+            border: 1px solid #00ff99;
+            color: #00ff99;
+            border-radius: 4px;
+        }
+
+        /* Button styling */
+        input[type="submit"], button {
+            width: 100%;
+            background-color: #00ff99;
+            color: #121212;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            margin-bottom: 10px;
+        }
+
+        input[type="submit"]:hover, button:hover {
+            background-color: #00cc7a;
+        }
+
+        /* Log section styling */
+        #logs {
+            margin-top: 30px;
+            background-color: #1e1e1e;
+            border: 1px solid #00ff99;
+            border-radius: 10px;
+            padding: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+            color: #00ff99;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        /* Utility button styling */
+        #clearLogsButton {
+            margin-top: 10px;
+        }
+
+        #testFeedbackButton {
+            background-color: #d5d5bb;
+        }
+
+        #testFeedbackButton:hover {
+            background-color: #f1f1e9;
+        }
+
+        /* Calibration area styling */
+        #calibrationArea {
+            display: none;
+            margin-top: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+        }
+
+        #calibrationTarget {
+            width: 20px;
+            height: 20px;
+            background-color: #ff0000;
+            border-radius: 50%;
+            position: absolute;
+            cursor: pointer;
+        }
+
+        /* Tab styling */
+        .tab {
+            overflow: hidden;
+            border: 1px solid #00ff99;
+            background-color: #1e1e1e;
+        }
+        
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            color: #00ff99;
+        }
+        
+        .tab button:hover {
+            background-color: #333333;
+        }
+        
+        .tab button.active {
+            background-color: #00ff99;
+            color: #121212;
+        }
+        
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #00ff99;
+            border-top: none;
+        }
+
+        /* User manual styling */
+        #userManual {
+            overflow-y: auto;
+            max-height: 500px;
+        }
+
+        /* Log controls styling */
+        #logControls {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #updateFrequency {
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main container -->
+    <div class="container">
+        <!-- Logo section -->
+        <div class="logo-container">
+            <img src="/ApexArc.png" alt="Apex Arc Logo">
+        </div>
+        <h1>Apex Arc Lightgun Settings</h1>
+
+        <!-- Tab navigation -->
+        <div class="tab">
+            <button class="tablinks" onclick="openTab(event, 'Settings')" id="defaultOpen">Settings</button>
+            <button class="tablinks" onclick="openTab(event, 'Logs')">Logs</button>
+            <button class="tablinks" onclick="openTab(event, 'Manual')">User Manual</button>
+        </div>
+
+        <!-- Settings tab content -->
+        <div id="Settings" class="tabcontent">
+            <form id="settingsForm">
+                <h2>Settings</h2>
+                
+                <!-- Communication Settings Section -->
+                <div>
+                    <h3>Communication Settings:</h3>
+                </div>
+                <label for="bleDeviceName">BLE Device Name:</label>
+                <input type="text" id="bleDeviceName" name="bleDeviceName" required>
+                
+                <label for="wifiSSID">WiFi SSID:</label>
+                <input type="text" id="wifiSSID" name="wifiSSID" required>
+                
+                <!-- Screen Settings Section -->
+                <div class="form-group">
+                    <h3>Screen Settings:</h3>
+                    <label for="screenWidth">Screen Width:</label>
+                    <input type="number" id="screenWidth" name="screenWidth" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="screenHeight">Screen Height:</label>
+                    <input type="number" id="screenHeight" name="screenHeight" min="1" required>
+                </div>
+              
+                <label for="smoothingFactor">Smoothing Factor:</label>
+                <input type="number" id="smoothingFactor" name="smoothingFactor" min="0" max="1" step="0.1" required>
+              
+                <!-- Hardware Pin Configuration Section -->
+              <h3>Hardware Settings:</h3>
+                <label for="triggerPin">Trigger Button Pin:</label>
+                <input type="number" id="triggerPin" name="triggerPin" min="0" max="40" required>
+
+                <label for="reloadPin">Reload Button Pin:</label>
+                <input type="number" id="reloadPin" name="reloadPin" min="0" max="40" required>
+
+                <label for="feedbackPin">Feedback Pin:</label>
+                <input type="number" id="feedbackPin" name="feedbackPin" min="0" max="40" required>
+<!-- Controller Settings Section -->
+              <h3>Controller Settings:</h3>
+                <label for="triggerMode">Trigger Mode:</label>
+                <select id="triggerMode" name="triggerMode">
+                    <option value="1">Single Shot Mode</option>
+                    <option value="2">Burst Shot Mode</option>
+                    <option value="3">Fully Automatic Mode</option>
+                </select>
+                
+                <!-- Burst Mode Settings -->
+                <div id="burstSettings" style="display:none;">
+                    <label for="burstClickCount">Burst Click Count:</label>
+                    <input type="number" id="burstClickCount" name="burstClickCount" min="1" max="10">
+                    
+                    <label for="burstDelay">Burst Delay (ms):</label>
+                    <input type="number" id="burstDelay" name="burstDelay" min="50" max="500">
+                </div>
+                
+                <!-- Full Auto Settings -->
+                <div id="fullAutoSettings" style="display:none;">
+                    <label for="fullAutoClicksPerSecond">Full Auto Clicks Per Second:</label>
+                    <input type="number" id="fullAutoClicksPerSecond" name="fullAutoClicksPerSecond" min="1" max="20">
+                </div>
+                
+                <!-- Feedback Settings -->
+                <label for="feedbackEnabled">Feedback Enabled:</label>
+                <select id="feedbackEnabled" name="feedbackEnabled">
+                    <option value="false">No</option>    
+                    <option value="true">Yes</option>
+                </select>
+                
+                <div id="feedbackSettings" style="display:none;">
+                    <label for="feedbackDuration">Feedback Duration (ms):</label>
+                    <input type="number" id="feedbackDuration" name="feedbackDuration" min="10" max="200">
+                    
+                    <label for="feedbackDelay">Feedback Delay (ms):</label>
+                    <input type="number" id="feedbackDelay" name="feedbackDelay" min="10" max="200">
+                </div>
+                
+                <input type="submit" value="Save Settings">
+            </form>
+            
+            <!-- Test and Calibration Buttons -->
+            <button id="testFeedbackButton">Test Feedback</button>
+            <button id="startCalibration">Start Calibration</button>
+        </div>
+
+        <!-- Logs tab content -->
+        <div id="Logs" class="tabcontent">
+            <h2>Logs</h2>
+            <div id="logs">Loading logs...</div>
+            <div id="logControls">
+                <button id="clearLogsButton">Clear Logs</button>
+                <button id="toggleScrollButton">Pause Scroll</button>
+                <div>
+                    <label for="updateFrequency">Update Frequency (ms):</label>
+                    <input type="range" id="updateFrequency" min="1000" max="10000" step="1000" value="5000">
+                    <span id="updateFrequencyValue">5000 ms</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Manual tab content -->
+        <div id="Manual" class="tabcontent">
+            <h2>User Manual</h2>
+            <div id="userManual">Loading user manual...</div>
+        </div>
+    </div>
+    
+    <!-- Calibration overlay -->
+    <div id="calibrationArea">
+        <h2 style="color: white; text-align: center;">Calibration</h2>
+        <p style="color: white; text-align: center;">Click on the red dot when it appears in each corner of your screen.</p>
+        <div id="calibrationTarget"></div>
+    </div>
+
+    <!-- JavaScript for functionality -->
+    <script>
+        // DOM element references
+        const settingsForm = document.getElementById('settingsForm');
+        const triggerModeSelect = document.getElementById('triggerMode');
+        const burstSettings = document.getElementById('burstSettings');
+        const fullAutoSettings = document.getElementById('fullAutoSettings');
+        const feedbackEnabledSelect = document.getElementById('feedbackEnabled');
+        const feedbackSettings = document.getElementById('feedbackSettings');
+        const testFeedbackButton = document.getElementById('testFeedbackButton');
+        const startCalibrationButton = document.getElementById('startCalibration');
+        const calibrationArea = document.getElementById('calibrationArea');
+        const calibrationTarget = document.getElementById('calibrationTarget');
+        const logsDiv = document.getElementById('logs');
+        const clearLogsButton = document.getElementById('clearLogsButton');
+        const toggleScrollButton = document.getElementById('toggleScrollButton');
+        const updateFrequencySlider = document.getElementById('updateFrequency');
+        const updateFrequencyValue = document.getElementById('updateFrequencyValue');
+        
+        // State variables
+        let autoScroll = true;
+        let logUpdateInterval;
+
+        // Fetch and populate settings
+        function fetchSettings() {
+            fetch('/settings')
+                .then(response => response.json())
+                .then(data => {
+                    // Populate communication settings
+                    document.getElementById('bleDeviceName').value = data.bleDeviceName || '';
+                    document.getElementById('wifiSSID').value = data.wifiSSID || '';
+                    
+                    // Populate screen settings
+                    document.getElementById('screenWidth').value = data.screenWidth || '';
+                    document.getElementById('screenHeight').value = data.screenHeight || '';
+                    
+                    // Populate pin configuration
+                    document.getElementById('triggerPin').value = data.triggerPin || '';
+                    document.getElementById('reloadPin').value = data.reloadPin || '';
+                    document.getElementById('feedbackPin').value = data.feedbackPin || '';
+                    document.getElementById('smoothingFactor').value = data.smoothingFactor || '0.5';
+                    
+                    // Populate controller settings
+                    triggerModeSelect.value = data.triggerMode || '1';
+                    document.getElementById('burstClickCount').value = data.burstClickCount || '3';
+                    document.getElementById('burstDelay').value = data.burstDelay || '100';
+                    document.getElementById('fullAutoClicksPerSecond').value = data.fullAutoClicksPerSecond || '10';
+                    
+                    // Populate feedback settings
+                    document.getElementById('feedbackDuration').value = data.feedbackDuration || '100';
+                    document.getElementById('feedbackDelay').value = data.feedbackDelay || '50';
+                    feedbackEnabledSelect.value = data.feedbackEnabled ? 'true' : 'false';
+                    
+                    // Update UI based on settings
+                    updateTriggerModeSettings();
+                    updateFeedbackSettings();
+                })
+                .catch(error => console.error('Error fetching settings:', error));
+        }
+
+        // Initialize settings
+        fetchSettings();
+
+        // Handle form submission
+        settingsForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const settings = Object.fromEntries(formData.entries());
+            
+            fetch('/update-settings', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams(settings).toString(),
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.status === 'success') {
+                    alert('Settings updated successfully');
+                    fetchSettings();
+                    fetchLogs();
+                } else {
+		alert('Error updating settings: ' + result.message);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+
+        // Log management functions
+        function fetchLogs() {
+            fetch('/logs')
+                .then(response => response.text())
+                .then(logs => {
+                    logsDiv.textContent = logs || 'No logs available.';
+                    if (autoScroll) {
+                        logsDiv.scrollTop = logsDiv.scrollHeight;
+                    }
+                })
+                .catch(error => console.error('Error fetching logs:', error));
+        }
+
+        // Clear logs handler
+        clearLogsButton.addEventListener('click', function() {
+            fetch('/clearLogs', { method: 'POST' })
+                .then(response => response.text())
+                .then(result => {
+                    alert(result);
+                    fetchLogs();
+                })
+                .catch(error => console.error('Error:', error));
+        });
+
+        // Auto-scroll toggle handler
+        toggleScrollButton.addEventListener('click', function() {
+            autoScroll = !autoScroll;
+            this.textContent = autoScroll ? 'Pause Scroll' : 'Resume Scroll';
+            if (autoScroll) {
+                logsDiv.scrollTop = logsDiv.scrollHeight;
+            }
+        });
+
+        // Update frequency handler
+        updateFrequencySlider.addEventListener('input', function() {
+            updateFrequencyValue.textContent = this.value + ' ms';
+            clearInterval(logUpdateInterval);
+            logUpdateInterval = setInterval(fetchLogs, this.value);
+        });
+
+        // Initialize log updates
+        logUpdateInterval = setInterval(fetchLogs, 5000);
+
+        // Trigger mode settings visibility handler
+        triggerModeSelect.addEventListener('change', updateTriggerModeSettings);
+
+        function updateTriggerModeSettings() {
+            const triggerMode = triggerModeSelect.value;
+            burstSettings.style.display = triggerMode === '2' ? 'block' : 'none';
+            fullAutoSettings.style.display = triggerMode === '3' ? 'block' : 'none';
+        }
+
+        // Feedback settings visibility handler
+        feedbackEnabledSelect.addEventListener('change', updateFeedbackSettings);
+
+        function updateFeedbackSettings() {
+            feedbackSettings.style.display = feedbackEnabledSelect.value === 'true' ? 'block' : 'none';
+            testFeedbackButton.style.display = feedbackEnabledSelect.value === 'true' ? 'block' : 'none';
+        }
+
+        // Test feedback handler
+        testFeedbackButton.addEventListener('click', function() {
+            fetch('/testFeedback', { method: 'POST' })
+                .then(response => response.text())
+                .then(result => {
+                    alert(result);
+                    fetchLogs();
+                })
+                .catch(error => console.error('Error:', error));
+        });
+
+        // Calibration process handlers
+        let calibrationStep = 0;
+        const calibrationPoints = [
+            { x: 10, y: 10 },
+            { x: window.innerWidth - 30, y: 10 },
+            { x: 10, y: window.innerHeight - 30 },
+            { x: window.innerWidth - 30, y: window.innerHeight - 30 }
+        ];
+
+        // Start calibration handler
+        startCalibrationButton.addEventListener('click', () => {
+            calibrationStep = 0;
+            calibrationArea.style.display = 'block';
+            moveCalibrationTarget();
+        });
+
+        // Move calibration target function
+        function moveCalibrationTarget() {
+            if (calibrationStep < calibrationPoints.length) {
+                const point = calibrationPoints[calibrationStep];
+                calibrationTarget.style.left = point.x + 'px';
+                calibrationTarget.style.top = point.y + 'px';
+            } else {
+                calibrationArea.style.display = 'none';
+                alert('Calibration complete!');
+            }
+        }
+
+        // Calibration target click handler
+        calibrationTarget.addEventListener('click', () => {
+            const point = calibrationPoints[calibrationStep];
+            fetch('/calibrate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    point: calibrationStep,
+                    x: point.x,
+                    y: point.y
+                }).toString(),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    calibrationStep++;
+                    if (calibrationStep < calibrationPoints.length) {
+                        moveCalibrationTarget();
+                    } else {
+                        calibrationArea.style.display = 'none';
+                        alert('Calibration complete!');
+                    }
+                } else {
+                    alert('Calibration error: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred during calibration. Please try again.');
+            });
+        });
+
+        // Tab management function
+        function openTab(evt, tabName) {
+            // Hide all tab content
+            var tabcontent = document.getElementsByClassName("tabcontent");
+            for (var i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            
+            // Remove active class from all tab buttons
+            var tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            
+            // Show selected tab and mark it as active
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        // Open Settings tab by default
+        document.getElementById("defaultOpen").click();
+
+        // User manual fetch function
+        function fetchUserManual() {
+            fetch('/userManual')
+                .then(response => response.text())
+                .then(manual => {
+                    document.getElementById('userManual').innerHTML = manual;
+                })
+                .catch(error => console.error('Error fetching user manual:', error));
+        }
+
+        // Add manual tab click handler
+        document.querySelector('.tablinks[onclick="openTab(event, \'Manual\')"]')
+            .addEventListener('click', fetchUserManual);
+
+        // Window resize handler for calibration points
+        window.addEventListener('resize', () => {
+            calibrationPoints[1].x = window.innerWidth - 30;
+            calibrationPoints[2].y = window.innerHeight - 30;
+            calibrationPoints[3].x = window.innerWidth - 30;
+            calibrationPoints[3].y = window.innerHeight - 30;
+        });
+    </script>
+</body>
+</html>
